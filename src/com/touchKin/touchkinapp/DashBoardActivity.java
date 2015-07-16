@@ -407,7 +407,7 @@ public class DashBoardActivity extends ActionBarActivity implements
 		mTabHost.addTab(
 				setIndicator(this, mTabHost.newTabSpec("Settings"),
 						R.color.tab_bg, "Settings", R.drawable.settings),
-				TouchKinBookFragment.class, b);
+						SettingsFragment.class, b);
 
 		b = new Bundle();
 		b.putString("key", "ER Plan");

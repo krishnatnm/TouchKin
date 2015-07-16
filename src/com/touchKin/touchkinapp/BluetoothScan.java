@@ -1,7 +1,8 @@
 package com.touchKin.touchkinapp;
 
 import java.util.ArrayList;
-
+import android.annotation.SuppressLint;
+import android.annotation.TargetApi;
 import android.app.Activity;
 import android.app.ActivityOptions;
 import android.bluetooth.BluetoothAdapter;
@@ -10,13 +11,15 @@ import android.bluetooth.BluetoothManager;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.v7.app.ActionBarActivity;
+import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.widget.Button;
+import android.widget.TextView;
 import android.widget.Toast;
-
 import com.skyfishjy.library.RippleBackground;
 import com.touchKin.touchkinapp.adapter.BluetoothDeviceAdapter;
 import com.touchKin.touckinapp.R;
@@ -33,7 +36,10 @@ public class BluetoothScan extends ActionBarActivity {
 	Handler mHandler;
 	private boolean mScanning;
 	RippleBackground rippleBackground;
+	private Toolbar toolbar;
+	TextView mTitle;
 
+	@SuppressLint("NewApi")
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -41,6 +47,9 @@ public class BluetoothScan extends ActionBarActivity {
 		rippleBackground = (RippleBackground) findViewById(R.id.content);
 		mHandler = new Handler();
 		scan = (Button) findViewById(R.id.bluetooth_scan);
+		toolbar = (Toolbar) findViewById(R.id.tool_bar);
+		mTitle = (TextView) toolbar.findViewById(R.id.toolbar_title);
+		mTitle.setText("Add a device");
 		mDevices = new ArrayList<BluetoothDevice>();
 		rssiList = new ArrayList<Integer>();
 		if (!getPackageManager().hasSystemFeature(
@@ -121,11 +130,14 @@ public class BluetoothScan extends ActionBarActivity {
 
 	}
 
+	@TargetApi(Build.VERSION_CODES.JELLY_BEAN_MR2)
+	@SuppressLint("NewApi")
 	@SuppressWarnings("deprecation")
 	private void scanLeDevice(final boolean enable) {
 		if (enable) {
 			// Stops scanning after a pre-defined scan period.
 			mHandler.postDelayed(new Runnable() {
+				@SuppressLint("NewApi")
 				@Override
 				public void run() {
 					mScanning = false;
@@ -148,6 +160,7 @@ public class BluetoothScan extends ActionBarActivity {
 		invalidateOptionsMenu();
 	}
 
+	@SuppressLint("NewApi")
 	private BluetoothAdapter.LeScanCallback mLeScanCallback = new BluetoothAdapter.LeScanCallback() {
 
 		@Override

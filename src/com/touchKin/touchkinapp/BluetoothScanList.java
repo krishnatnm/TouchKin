@@ -24,7 +24,6 @@ import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-
 import com.touchKin.touchkinapp.adapter.BluetoothDeviceAdapter;
 import com.touchKin.touchkinapp.model.BluetoothDeviceModel;
 import com.touchKin.touckinapp.R;
@@ -48,7 +47,7 @@ public class BluetoothScanList extends ActionBarActivity implements
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.available_bluetooth_device_list);
 		init();
-		mTitle.setText("Add a device");
+		mTitle.setText("Select a device");
 		next.setOnClickListener(this);
 		bledevicelist.setOnItemClickListener(this);
 		Bundle bundle = getIntent().getExtras();
@@ -127,12 +126,7 @@ public class BluetoothScanList extends ActionBarActivity implements
 		// TODO Auto-generated method stub
 		switch (v.getId()) {
 		case R.id.next_button:
-			Intent i = new Intent(BluetoothScanList.this,
-					DashBoardActivity.class);
-			Bundle bndlanimation = ActivityOptions.makeCustomAnimation(
-					getApplicationContext(), R.anim.animation,
-					R.anim.animation2).toBundle();
-			startActivity(i, bndlanimation);
+			finish();
 			break;
 
 		default:
